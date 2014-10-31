@@ -9,19 +9,22 @@ $(function() {
 		});
 		makeThumb(list);
 	});
-	timerID = setInterval(function(){
-		select((selectNum + 1) % $(".thumbnail").length);
-	}, 10000);
+	start(10000);
 });
 
 function select(Num){
 	$(".active").removeClass("active");
 	selectNum = Num - 0;
-	var $selectThumb = $(".thumbnail:eq(" + selectNum + ")");
+	var $selectThumb = $(".thumbnail-list .thumbnail:eq(" + selectNum + ")");
 	$(".view").attr("src", $selectThumb.attr("href"));
 	$selectThumb.addClass("active");
 }
 
+function start(msec){
+	timerID = setInterval(function(){
+		select((selectNum + 1) % $(".thumbnail").length);
+	}, msec);
+}
 function stop(){
 	clearInterval(timerID);
 }
