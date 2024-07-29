@@ -3,9 +3,10 @@ var selectNum;
 var list;
 
 $(function() {
-	$.getJSON("./img/list.json", function(data){
+	$.getJSON("./list.json", function(data){
+		console.log(data);
 		list = $.map(data, function(x){
-			return "./img/" + x;
+			return x;
 		});
 		makeThumb(list);
 	});
@@ -13,11 +14,13 @@ $(function() {
 });
 
 function select(Num){
+	stop();
 	$(".active").removeClass("active");
 	selectNum = Num - 0;
 	var $selectThumb = $(".thumbnail-list .thumbnail:eq(" + selectNum + ")");
 	$(".view").attr("src", $selectThumb.attr("href"));
 	$selectThumb.addClass("active");
+	start(10000);
 }
 
 function start(msec){
